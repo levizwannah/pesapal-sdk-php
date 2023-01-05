@@ -138,7 +138,6 @@ class Pesapal{
     public function http(){
 
         return new Client([
-            'base_url' => $this->baseUrl,
             'accept' => 'application/json',
             'content-type' => 'application/json'
         ]);
@@ -223,8 +222,9 @@ class Pesapal{
      * @return object response
      */
     public function request($data, $endpoint, $authenticated = true, $method = "post"){
+        
         $http = $this->http();
-
+        $endpoint = $this->baseUrl . ($endpoint);
         if(!$authenticated){
             $response = $http->$method($endpoint, [
                 'json' => $data
@@ -236,8 +236,8 @@ class Pesapal{
                 'auth' => ['Bearer', $this->token()]
             ]);
         }
-
-        $this->response((object) $response->getBody());
+        
+        $this->response(json_decode($response->getBody()));
         $this->assertAccepted();
 
         return $this->response();
@@ -252,7 +252,7 @@ class Pesapal{
     public function received($status = 200){
 
         header("Content-Type: application/json");
-        
+
         echo json_encode([
             "status" => $status,
             "description" => "Received"

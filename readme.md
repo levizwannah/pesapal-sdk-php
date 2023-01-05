@@ -1,4 +1,4 @@
 # Pesapal PHP SDK
 A PHP SDK for the Pesapal API version 3.
 
-> Still under development, you can contribute
+> Documentation coming soon. But you can read through the code or use autocomplete in your text editor.

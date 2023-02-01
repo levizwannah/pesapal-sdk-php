@@ -138,8 +138,8 @@ class Pesapal{
     public function http(){
 
         return new Client([
-            'accept' => 'application/json',
-            'content-type' => 'application/json'
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json'
         ]);
     }
 
@@ -168,7 +168,7 @@ class Pesapal{
     public function registerIpn($ipnUrl, $httpMethod = "POST"){
 
         $this->request([
-            "id" => $ipnUrl,
+            "url" => $ipnUrl,
             "ipn_notification_type" => $httpMethod
         ], "/api/URLSetup/RegisterIPN");
 
@@ -233,7 +233,9 @@ class Pesapal{
         else{
             $response = $http->$method($endpoint, [
                 'json' => $data,
-                'auth' => ['Bearer', $this->token()]
+                'headers' => [
+                    'Authorization' => 'Bearer '. $this->token()
+                ]
             ]);
         }
         

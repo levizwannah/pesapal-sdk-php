@@ -25,7 +25,7 @@ trait AssertTrait {
      */
     public function assertAccepted(){
         if(!$this->accepted()){
-            throw new PesapalException("Pesapal rejected the request with error");
+            throw new PesapalException("Pesapal rejected the request with error " . print_r((array)$this->response(), true));
         }
     }
 }

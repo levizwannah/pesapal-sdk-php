@@ -240,7 +240,6 @@ class Pesapal{
         }
         
         $this->response(json_decode($response->getBody()));
-        $this->assertAccepted();
 
         return $this->response();
     }
